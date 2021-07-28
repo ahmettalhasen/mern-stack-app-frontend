@@ -22,6 +22,7 @@ const useStyles = makeStyles({
 
 
 function UserRentalsTableComponent(props) {
+    const daysOfWeek = ["Sunday", "Monday", "Tuesday", " Wednesday", "Thursday", "Friday", "Saturday"];
     const classes = useStyles();
 
     let allRentals = props.allRentals;
@@ -51,7 +52,14 @@ function UserRentalsTableComponent(props) {
                     {allRentals.map((rental) => (
                         <TableRow key="test">
                             <TableCell component="th" scope="row">
-                                {Date(rental.date).toString()}
+                            {daysOfWeek[new Date(rental.date).getDay()]} {new Date(rental.date).toLocaleString('en-US', {
+                                    day: 'numeric',
+                                    month: 'numeric',
+                                    year: 'numeric',
+                                    hour: 'numeric',
+                                    minute: 'numeric',
+                                    hour12: true
+                                })}
                             </TableCell>
                             {props.isFuture ? (
                                 <>
